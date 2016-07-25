@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ingredient extends Model
+class Unit extends Model
 {
     public function recipes() {
-      return $this->belongsToMany('\App\Recipe', 'recipe_ingredient');
+      $this->hasOne('App\Ingredient');
     }
 }

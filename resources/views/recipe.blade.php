@@ -15,8 +15,10 @@
 
       <ul class="list-group">
         <!-- Here I tried to implement the pivot table, but it didn't work :( -->
-
-        <li class="list-group-item">2 fed hvidløg</li>
+        @foreach ($recipes->$ingredients as $ingredient)
+          <li class="list-group-item">{{ $ingredient }}</li>
+        @endforeach
+        <!--<li class="list-group-item">2 fed hvidløg</li>
         <li class="list-group-item">1 gulerod</li>
         <li class="list-group-item">1 løg</li>
         <li class="list-group-item">Olie til stegning</li>
@@ -24,11 +26,12 @@
         <li class="list-group-item">2 spsk. tomatpuré</li>
         <li class="list-group-item">1 dåse hakkede tomater</li>
         <li class="list-group-item">Salt og peper</li>
-        <li class="list-group-item">Lidt sukker</li>
+        <li class="list-group-item">Lidt sukker</li>-->
       </ul>
     </div>
 
     <div class="col-md-8">
+      <h4>Walkthrough</h4>
       <div class="panel panel-default">
         <div class="panel-body">
           {{ $recipes->walkthrough }}
