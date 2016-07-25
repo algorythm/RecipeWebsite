@@ -2,42 +2,39 @@
 
 @section('content')
 <div class="container">
-  <div class="row">
-    <div class="page-header">
-      <h1>{{ $recipes->title }}</h1>
-    </div>
+    <div class="row">
 
-    <img src="/{{ $recipes->banner_url }}" alt="{{ $recipes->title }}" class="img-responsive">
-    <br>
-
-    <div class="col-md-4">
-      <h4>Ingredientser</h4>
-
-      <ul class="list-group">
-        <!-- Here I tried to implement the pivot table, but it didn't work :( -->
-        @foreach ($recipes->$ingredients as $ingredient)
-          <li class="list-group-item">{{ $ingredient }}</li>
-        @endforeach
-        <!--<li class="list-group-item">2 fed hvidløg</li>
-        <li class="list-group-item">1 gulerod</li>
-        <li class="list-group-item">1 løg</li>
-        <li class="list-group-item">Olie til stegning</li>
-        <li class="list-group-item">300g hakket oksekød</li>
-        <li class="list-group-item">2 spsk. tomatpuré</li>
-        <li class="list-group-item">1 dåse hakkede tomater</li>
-        <li class="list-group-item">Salt og peper</li>
-        <li class="list-group-item">Lidt sukker</li>-->
-      </ul>
-    </div>
-
-    <div class="col-md-8">
-      <h4>Walkthrough</h4>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          {{ $recipes->walkthrough }}
-        </div>
+      <div class="page-header">
+        <h1>{{ $recipe->name }}</h1>
       </div>
+
+      <img src="/images/{{ $recipe->banner_image }}" alt="{{ $recipe->name }}" class="img-responsive"> <br/>
+
+      <div class="col-md-4">
+        <h3>Ingredients</h3>
+        <ul class="list-group">
+          @foreach($recipe->ingredients as $ingredient)
+            <li class="list-group-item">{{ $ingredient->name }}</li>
+          @endforeach
+        </ul>
+      </div>
+
+      <div class="col-md-8">
+        <h3>Walkthrough</h3>
+
+        <!-- http://codeitdown.com/ordered-list-css-styles/ -->
+        <ol class="simple-list">
+          @foreach($json_w->walkthrough as $step)
+            <li class="simple-list">{{ $step->desc }}</li>
+          @endforeach
+        </ol>
+      </div>
+
+      <hr>
+      <p>
+        <!-- add username -->
+        Written by {{ $recipe->users->name }}
+      </p>
     </div>
-  </div>
 </div>
 @endsection
