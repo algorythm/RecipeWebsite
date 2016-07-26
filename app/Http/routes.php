@@ -72,10 +72,6 @@ Route::get('/quick_data', function() {
   App\Role::create(['name' => 'Administrator']);
   App\Role::create(['name' => 'User']);
 
-  App\Role_User::create([
-    'role_id' => 1,
-    'user_id' => 1,
-  ]);
 });
 
 Route::auth();
