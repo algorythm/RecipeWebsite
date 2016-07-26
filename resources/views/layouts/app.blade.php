@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="/css/custom.css" media="screen">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
+    @yield('head')
+
     <style>
         body {
             font-family: 'Lato';
