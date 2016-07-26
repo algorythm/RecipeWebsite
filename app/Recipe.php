@@ -6,12 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
-    public function user() {
-      return $this->belongsTo('App\User');
-    }
+  protected $fillable = [
+    'user_id',
+    'name',
+    'slug',
+    'description',
+    'walkthrough',
+    'prep_time',
+    'cook_time',
+    'difficulty',
+    'post_image',
+    'banner_image',
+  ];
 
-    public function ingredients() {
-      return $this->belongsToMany('App\Ingredient');
-    }
+  public function user() {
+    return $this->belongsTo('App\User');
+  }
+
+  public function ingredients() {
+    return $this->belongsToMany('App\Ingredient');
+  }
 
 }

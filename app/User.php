@@ -27,4 +27,8 @@ class User extends Authenticatable
     public function recipes() {
       return $this->hasMany('App\Recipe');
     }
+
+    public function roles() {
+      return $this->belongsToMany('App\Role');
+    }
 }

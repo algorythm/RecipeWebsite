@@ -14,6 +14,12 @@
                         {{ $recipe->name }}
                       </p>
                     @endforeach
+
+                    <br><hr>
+
+                    @foreach($user->roles as $role)
+                      <p>{{ $role->name }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

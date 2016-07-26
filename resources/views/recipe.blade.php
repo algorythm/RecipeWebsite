@@ -7,6 +7,11 @@
       <div class="page-header">
         <h1>{{ $recipe->name }}</h1>
       </div>
+      @if (Auth::check())
+        @if (Auth::user()->roles->where('name','Administrator')->count() > 0)
+          <p><a href="{{ url('edit/' . $recipe->slug) }}">Edit</a> this recipe.</p>
+        @endif
+      @endif
 
       <img src="/images/{{ $recipe->banner_image }}" alt="{{ $recipe->name }}" class="img-responsive"> <br/>
 
@@ -34,7 +39,8 @@
       <p>
         <!-- add username -->
         <!-- doesn't work :( -->
-        Recipe written by {{ $recipe->user->name }}.
+        Recipe written by
+        <a href="{{ url('profile/' . $recipe->user->name)}}">{{ $recipe->user->name }}</a>.
       </p>
     </div>
 </div>

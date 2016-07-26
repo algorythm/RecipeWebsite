@@ -20,8 +20,6 @@ Route::get('/', function() {
   'uses' => 'RecipeController@index',
 ]);*/
 
-//Route::get('/recipe/{recipe}', 'RecipeController@index');
-
 Route::get('/recipe/{recipe}', function($recipe) {
   $recipe = App\Recipe::where('slug', $recipe)->firstOrFail();
   $json_w = json_decode($recipe->walkthrough);
@@ -38,6 +36,51 @@ Route::get('/profile/{username}', function($username) {
   return View::make('profile')->with('user',$user);
 });
 
+Route::get('/test', function() {
+  echo 'test';
+});
+
+Route::get('/quick_data', function() {
+  // This will be for inserting data at a later stage.
+  App\Recipe::create([
+    'user_id'      => 1,
+    'name'         => "Spaghetti",
+    'slug'         => 'spaghetti',
+    'description'  => 'This is the number one easiest way to cook spaghetti!',
+    'walkthrough'  => '{"walkthrough":[{"step": 0,"desc": "Boiling the spaghetti"},{"step": 1,"desc": "Pour up some water in a pan and put it on the stove with the lid on."},{"step": 2,"desc": "Put in a little bit of salt and some Olive Oil."},{"step": 3,"desc": "When the water is boiling, put in the speghetti."},{"step": 4,"desc": "After 4-5 minutes of boiling, the spaghetti is finished."}]}',
+    'prep_time'    => 1,
+    'cook_time'    => 10,
+    'difficulty'   => 1,
+    'post_image'   => 'image_242x200.png',
+    'banner_image' => 'image_1624x700.png',
+  ]);
+
+  $ingredients = ['Spaghetti', 'Salt', 'Olive Oil', 'Water'];
+  foreach($ingredients as $ingredient) {
+    App\Ingredient::create([
+      'name' => $ingredient,
+    ]);
+  }
+
+  for ($x = 1; $x <= 4; $x++) {
+    App\Ingredient_Recipe::create([
+      'ingredient_id' => $x,
+      'recipe_id'     => 1,
+    ]);
+  }
+
+  App\Role::create(['name' => 'Administrator']);
+  App\Role::create(['name' => 'User']);
+
+  App\Role_User::create([
+    'role_id' => 1,
+    'user_id' => 1,
+  ]);
+});
+
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', [
+  'uses' => 'HomeController@index',
+  'as'   => 'home',
+]);
