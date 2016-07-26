@@ -33,7 +33,8 @@
       <hr>
       <p>
         <!-- add username -->
-        Written by {{ $recipe->users->name }}
+        <!-- doesn't work :( -->
+        Recipe written by {{ $recipe->user->name }}.
       </p>
     </div>
 </div>
